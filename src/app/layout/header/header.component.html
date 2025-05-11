@@ -1,0 +1,34 @@
+<mat-toolbar color="primary" *ngIf="showHeader" class="header-toolbar">
+
+  <!-- Left: Volume Controls -->
+  <div class="volume-control">
+    <div class="icon-wrapper" (mouseenter)="showBGMSlider = true" (mouseleave)="showBGMSlider = false">
+      <mat-icon>music_note</mat-icon>
+      <mat-slider *ngIf="showBGMSlider">
+          <input matSliderThumb
+               [(ngModel)]="BGMValue"
+               (input)="setBGMVolume(BGMValue)"
+               min="0" max="100" step="1">
+      </mat-slider>
+    </div>
+
+    <div class="icon-wrapper" (mouseenter)="showSFXSlider = true" (mouseleave)="showSFXSlider = false">
+      <mat-icon>volume_up</mat-icon>
+      <mat-slider *ngIf="showSFXSlider">
+        <input matSliderThumb
+               [(ngModel)]="SFXValue"
+               (input)="setSFXVolume(SFXValue)"
+               min="0" max="100" step="1">
+      </mat-slider>
+    </div>
+  </div>
+
+  <!-- Center: Username -->
+  <span class="header-title" *ngIf="auth.currentUser">
+    {{ auth.currentUser.username }} ({{ auth.currentUser.role }})
+  </span>
+
+  <!-- Right: Logout -->
+  <span class="spacer"></span>
+  <button mat-button (click)="logout()">Logout</button>
+</mat-toolbar>
